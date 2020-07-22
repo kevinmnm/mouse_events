@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Mouse Event Note</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Indie+Flower&family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+html{}
+body{
+	position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+	font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+    background-color: #181818;
+    color: grey;
+}
+#clientS{
+	position: absolute;
+    top: 300px;
+    width: 50%;
+    height: 30%;
+    boax-sizing: border-box;
+    box-shadow: 0 0 10px black;
+    left: 200px;
+    background-color: brown;
+}
+#offS{
+	position: absolute;
+    top: 1500px;
+    width: 50%;
+    height: 35%;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px black;
+    margin-bottom: 100px;
+    left: 100px;
+    background-color: darkGrey;
+}
+.outP{
+	position: relative;
+    top: 0;
+    font-size: 20px;
+    margin: auto;
+    box-sizing: border-box;
+    padding: 5px;
+    color: white;
+    text-align: center;
+}
+#pageOff{
+	position: fixed;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 25%;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px black;
+    background-color: darkBlue;
+}
+</style>
+</head>
+<body>
+<h1>All the mouse event list!</h1>
+<div id='wrapper'>
+	<div id='pageOff' @mousemove='getPagePos($event)'>
+    	<div class='outP'>{{ pagContent }}<br><i>{{ ofc0 }}</i><br><br>{{ 'pageX: ' + pgX }}<br>{{ 'pageY: ' + pgY }}</div>
+    </div>
+
+	<div id='clientS' @mousemove='getClientPos($event)'>
+    	<div class='outP'>{{ cliContent }}<br><i>{{ ofc1 }}</i><br><br>{{ 'clientX: ' + cliX }}<br>{{ 'clientY: ' + cliY }}</div>
+    </div>
+    
+	<div id='offS' @mousemove='getOffSet($event)'>
+    	<div class='outP'>{{ offsContent }}<br><i>{{ ofc2 }}</i><br><br>{{ 'offsetX: ' + offsX }}<br>{{ 'offsetY: ' + offsY }}</div>
+    </div>
+    
+</div>
+<script>
+
+new Vue({
+	el: '#wrapper',
+    data: {
+    	pagContent: 'Mouse Position Of This Web Page',
+        pgX: 0,
+        pgY: 0,
+        ofc0: '(e.pageX & e.pageY)',
+    	cliContent: 'Mouse Position Client Of This Element',
+        ofc1: '(e.clientX & e.clientY)',
+        cliX: 0,
+        cliY: 0,
+    	offsContent: 'Mouse Position Offset Of This Element',
+        ofc2: '(e.offsetX & e.offsetY)',
+    	offsX: 0,
+        offsY: 0
+    },
+    methods: {
+    	getPagePos: function(event){
+        	this.pgX = event.pageX;
+            this.pgY = event.pageY;
+        },
+    	getClientPos: function(event){
+        	this.cliX = event.clientX;
+            this.cliY = event.clientY;
+        },
+    	getOffSet: function(event){
+        	this.offsX = event.offsetX;
+            this.offsY = event.offsetY;
+        }
+    }
+});
+
+</script>
+</body>
+</html>
